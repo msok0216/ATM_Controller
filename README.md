@@ -1,5 +1,6 @@
 # ATM Controller
 This project implements controller part of ATM without any integration with bank or hardware API.
+Check out the [UML Diagram](https://github.com/msok0216/ATM_Controller.wiki.git) for the project in the wiki page.
 
 ## Get Started
 ### 1. Install Python
