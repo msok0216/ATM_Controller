@@ -1,5 +1,8 @@
 from transactions.transaction import Transaction
 
+"""
+    Class for storing relevant account information
+"""
 class Account:
     def __init__(self, owner, accountNumber, balance=0):
         self.__owner = owner

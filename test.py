@@ -67,8 +67,6 @@ class Test(unittest.TestCase):
         self.assertEqual(self.atm.getCurrAccount().getTransactions()[-1].getAmount(), 90000)
         self.assertFalse(self.atm.initiateTransaction("Deposit", -10000))
 
-        self.atm.exit()
-
         self.assertIsNone(self.atm.getCurrAccount())
         self.assertIsNone(self.atm.getCard())
 

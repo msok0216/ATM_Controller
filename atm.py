@@ -43,7 +43,7 @@ class ATM:
   # If the card isn't valid, exit the process and eject the card
   def insertCard(self, card, pin):
     if not self.validate(card, pin):
-      self.exit()
+      self.__exit()
       self.ejectCard()
       return False
     self.setCard(card)
@@ -57,7 +57,7 @@ class ATM:
   # Confirm pin and if the pin is valid, set current account to the object retrieved from the bank
   def validate(self, card, pin):
     try:
-      if self.confirmPIN(card.getCardNumber(), pin):
+      if self.__confirmPIN(card, pin):
         return True
       else:
         raise ValueError('Invalid Card')
@@ -66,58 +66,55 @@ class ATM:
       print(str(e))
       return False
     
-  def confirmPIN(self, cardNumber, pin):
+  def __confirmPIN(self, card, pin):
     return True
 
 
-  '''
-  '''
   def initiateTransaction(self, action, amount=0):
     try:
       if action == "Check":
-        return self.checkAccountBalance()
+        return self.__checkAccountBalance()
       else:
         if amount < 0: 
-          self.exit()
-          return False
+          raise ValueError("Invalid Input for Transaction Amount")
         elif action == "Withdraw":
-          self.withdraw(amount)
+          self.__withdraw(amount)
           t = Withdraw(self.getCurrAccount().getAccountNumber(), amount)
           self.__balance -= amount
           self.__transactions.append(t)
           self.getCurrAccount().addTransaction(t)
           return self.getCurrAccount().getBalance()
         elif action == "Deposit":
-          self.deposit(amount)
+          self.__deposit(amount)
           t = Deposit(self.getCurrAccount().getAccountNumber(), amount)
           self.__balance += amount
           self.__transactions.append(t)
           self.getCurrAccount().addTransaction(t)
           return self.getCurrAccount().getBalance()
 
-      
     except (ValueError, TypeError) as e:
-      # print(str(e))
-      self.exit()
+      print(str(e))
+      self.__exit()
+      self.ejectCard()
       return False
 
-  def deposit(self, amount):
+  def __deposit(self, amount):
     self.getCurrAccount().deposit(amount)
     self.__balance += amount
     return self.getCurrAccount().getBalance()
     # Add amount to cash bin balance in the future
 
-  def withdraw(self, amount):
+  def __withdraw(self, amount):
     self.getCurrAccount().withdraw(amount)
     self.__balance -= amount
     return self.getCurrAccount().getBalance()
     # Subtract amount from cash bin balance in the future
 
   # returns 
-  def checkAccountBalance(self):
+  def __checkAccountBalance(self):
     return self.getCurrAccount().getBalance()
 
-  def exit(self):
+  def __exit(self):
     self.__account = None
     self.__card = None
   

@@ -1,3 +1,6 @@
+"""
+    Class for storing relevant card information
+"""
 class Card:
     def __init__(self, owner, accountNumber, expirationDate, cvv, cardNumber):
         self.__owner = owner
