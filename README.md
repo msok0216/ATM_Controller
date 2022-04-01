@@ -1,5 +1,5 @@
 # ATM Controller
-This project implements controller part of ATM without any integration with bank or hardware API.
+This project implements controller part of ATM without any integration with bank or hardware API.<br/>
 Check out the [UML Diagram](https://github.com/msok0216/ATM_Controller.wiki.git) for the project in the wiki page.
 
 ## Get Started
